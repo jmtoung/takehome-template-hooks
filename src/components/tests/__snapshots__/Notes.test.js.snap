@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Notes displays notes from state 1`] = `
+<div>
+  <div>
+    <ul
+      className="pagination"
+    >
+      <li
+        className="page-item"
+      >
+        <Link
+          className="page-link"
+          to="/"
+        >
+          First
+        </Link>
+      </li>
+      <li
+        className="page-item"
+        key="1"
+      >
+        <Link
+          className="page-link"
+          to="/1"
+        >
+          1
+        </Link>
+      </li>
+      <li
+        className="page-item"
+      >
+        <Link
+          className="page-link"
+          to="/1"
+        >
+          Last
+        </Link>
+      </li>
+    </ul>
+  </div>
+  <div>
+    <ul>
+      <Note
+        body="body1"
+        deleteNote={[Function]}
+        id={1}
+        key="1"
+        title="title1"
+      />
+      <Note
+        body="body2"
+        deleteNote={[Function]}
+        id={2}
+        key="2"
+        title="title2"
+      />
+      <Note
+        body="body3"
+        deleteNote={[Function]}
+        id={3}
+        key="3"
+        title="title3"
+      />
+    </ul>
+  </div>
+</div>
+`;

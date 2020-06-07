@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Note calls updateView function and view is updated. 1`] = `
+<div
+  id="1"
+>
+  <div
+    onClick={[Function]}
+  >
+    <NoteForm
+      body="This is the body."
+      handleChange={[Function]}
+      handleSubmit={[Function]}
+      text="Update Note"
+      title="This is a title"
+    />
+  </div>
+</div>
+`;
+
+exports[`Note renders note correctly. 1`] = `
+<div>
+  <div>
+    <Row
+      noGutters={false}
+    >
+      <Col>
+        <Link
+          from="/undefined"
+          to={
+            Object {
+              "pathname": "/note/undefined",
+              "state": Object {
+                "body": undefined,
+                "title": undefined,
+              },
+            }
+          }
+        >
+          <h2 />
+        </Link>
+      </Col>
+      <Button
+        active={false}
+        className="update-view"
+        disabled={false}
+        onClick={[Function]}
+        style={
+          Object {
+            "margin": "5px",
+          }
+        }
+        type="button"
+        variant="primary"
+      >
+        <Image
+          alt="edit"
+          fluid={false}
+          height="20"
+          rounded={false}
+          roundedCircle={false}
+          src={
+            Object {
+              "default": "pencil.png",
+            }
+          }
+          thumbnail={false}
+          width="20"
+        />
+      </Button>
+      <Button
+        active={false}
+        className="delete"
+        disabled={false}
+        style={
+          Object {
+            "margin": "5px",
+          }
+        }
+        type="button"
+        variant="secondary"
+      >
+        <Image
+          alt="delete"
+          fluid={false}
+          height="20"
+          rounded={false}
+          roundedCircle={false}
+          src={
+            Object {
+              "default": "delete.png",
+            }
+          }
+          thumbnail={false}
+          width="20"
+        />
+      </Button>
+    </Row>
+    <Row
+      noGutters={false}
+    >
+      <Col>
+        <p />
+      </Col>
+    </Row>
+  </div>
+</div>
+`;

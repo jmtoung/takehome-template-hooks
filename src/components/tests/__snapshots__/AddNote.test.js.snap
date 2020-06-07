@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddNote calls updateAddNoteView and displays form view. 1`] = `
+<NoteForm
+  body=""
+  handleChange={[Function]}
+  handleSubmit={[Function]}
+  text="Add Note"
+  title=""
+/>
+`;
+
+exports[`AddNote renders addNote button view correctly. 1`] = `
+<Button
+  active={false}
+  className="create-note"
+  disabled={false}
+  onClick={[Function]}
+  type="button"
+  variant="primary"
+>
+  Create Note
+</Button>
+`;

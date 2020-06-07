@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotFound renders NotFound component correctly. 1`] = `
+<Container
+  fluid={false}
+>
+  <Jumbotron
+    fluid={false}
+  >
+    <h1>
+      404! The page you are looking for was not found.
+    </h1>
+  </Jumbotron>
+</Container>
+`;

@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoteForm renders noteForm component correctly. 1`] = `
+<Form
+  inline={false}
+  onSubmit={[Function]}
+>
+  <FormGroup
+    controlId="exampleForm.ControlTextarea1"
+  >
+    <FormControl
+      className="title-input"
+      name="title"
+      placeholder="Title..."
+      type="text"
+      value="Testing Title"
+    />
+    <FormControl
+      as="textarea"
+      className="body-input"
+      name="body"
+      placeholder="Content..."
+      rows={4}
+      value="Testing Body"
+    />
+  </FormGroup>
+  <Button
+    active={false}
+    disabled={false}
+    type="submit"
+    variant="primary"
+  >
+    Testing
+  </Button>
+</Form>
+`;
