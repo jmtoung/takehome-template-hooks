@@ -9,10 +9,9 @@ import { useNote } from '../hooks/useNote';
 type TParams = { id: string };
 
 export const NoteDetailView = ({
-  match,
+  match: { params: { id } },
   history,
 }: RouteComponentProps<TParams>) => {
-  const { id } = match.params;
   const { title, body, setTitle, setBody, notFound } = useNote(id);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -37,7 +36,7 @@ export const NoteDetailView = ({
           text="Update Note"
           title={title}
           body={body}
-          handleSubmit={(e) => handleSubmit(e)}
+          handleSubmit={handleSubmit}
           handleBodyChange={(e) => setBody(e.target.value)}
           handleTitleChange={(e) => setTitle(e.target.value)}
         />

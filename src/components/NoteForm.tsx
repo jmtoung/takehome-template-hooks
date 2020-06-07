@@ -1,14 +1,16 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 
-export const NoteForm: React.FunctionComponent<{
+type Props = {
   title: string;
   body: string;
   text: string;
   handleBodyChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleTitleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-}> = (props) => {
+}
+
+export function NoteForm(props: Props) {
   const {
     title,
     body,
@@ -44,4 +46,4 @@ export const NoteForm: React.FunctionComponent<{
       </Button>
     </Form>
   );
-};
+}

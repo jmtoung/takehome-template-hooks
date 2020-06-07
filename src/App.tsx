@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { NotebookView } from './views/NotebookView';
 import { NoteDetailView } from './views/NoteDetailView';
 
@@ -9,6 +9,7 @@ export function App() {
       <Route exact path='/' component={NotebookView} />
       <Route exact path='/:page' component={NotebookView} />
       <Route exact path='/note/:id' component={NoteDetailView} />
+      <Redirect to='/' />
     </Switch>
   );
 }

@@ -1,32 +1,38 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { API } from '../api';
 import { useInput } from '../hooks/useInput';
 import { NoteForm } from './NoteForm';
 
-export const AddNote: React.FunctionComponent<{
+type Props = {
   total: number;
   page: string;
-  fetchNotes: () => {};
-}> = (props) => {
-  const [isCreating, setIsCreating] = useState<boolean>(false);
+  fetchNotes: () => Promise<void>;
+}
+
+export function AddNote({ page, total, fetchNotes }: Props) {
+  const [isCreating, setIsCreating] = useState(false);
   const { value: title, onChange: changeTitle, reset: resetTitle } = useInput(
     ''
   );
   const { value: body, onChange: changeBody, reset: resetBody } = useInput('');
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await API.addNote(title, body);
-    resetTitle();
-    resetBody();
-    setIsCreating(false);
-
-    const { page, total } = props;
-    if (parseInt(page, 10) === Math.ceil(total / 10)) {
-      props.fetchNotes();
+    try {
+      await API.addNote(title, body);
+      resetTitle();
+      resetBody();
+    } catch(error) {
+      // process the error
+    } finally {
+      setIsCreating(false);
     }
-  };
+
+    if (parseInt(page, 10) === Math.ceil(total / 10)) {
+      await fetchNotes();
+    }
+  }, [fetchNotes, page, total, title, body, resetBody, resetTitle]);
 
   if (!isCreating) {
     return (
@@ -35,14 +41,15 @@ export const AddNote: React.FunctionComponent<{
       </Button>
     );
   }
+
   return (
     <NoteForm
       text="Create Note"
       title={title}
       body={body}
-      handleSubmit={(e) => handleSubmit(e)}
+      handleSubmit={handleSubmit}
       handleBodyChange={changeBody}
       handleTitleChange={changeTitle}
     />
   );
-};
+}

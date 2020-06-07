@@ -7,18 +7,17 @@ export const useNotes = (page: string) => {
 
   const fetchNotes = useCallback(async () => {
     const result = await API.getNotes(page);
+    // If API response is not correct, you should handle, potentially bump people back to '/'
     setNotes(result.notes);
-    if (result.total !== total) {
-      setTotal(result.total);
-    }
-  }, [page, total]);
+    setTotal(result.total);
+  }, [page]);
 
   useEffect(() => {
     fetchNotes();
   }, [fetchNotes]);
 
   return {
-    fetchNotes: () => fetchNotes(),
+    fetchNotes,
     notes,
     total,
   };
