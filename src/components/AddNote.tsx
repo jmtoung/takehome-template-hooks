@@ -3,20 +3,21 @@ import { Button } from 'react-bootstrap';
 import { API } from '../api';
 import { useInput } from '../hooks/useInput';
 import { NoteForm } from './NoteForm';
+import { useFetchNotes } from '../hooks/useFetchNotes';
 
 type Props = {
   total: number;
   page: string;
-  fetchNotes: () => Promise<void>;
 }
 
-export function AddNote({ page, total, fetchNotes }: Props) {
+export function AddNote({ page, total }: Props) {
   const [isCreating, setIsCreating] = useState(false);
   const { value: title, onChange: changeTitle, reset: resetTitle } = useInput(
     ''
   );
   const { value: body, onChange: changeBody, reset: resetBody } = useInput('');
 
+  const fetchNotes = useFetchNotes()
   const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
@@ -30,7 +31,7 @@ export function AddNote({ page, total, fetchNotes }: Props) {
     }
 
     if (parseInt(page, 10) === Math.ceil(total / 10)) {
-      await fetchNotes();
+      await fetchNotes(page);
     }
   }, [fetchNotes, page, total, title, body, resetBody, resetTitle]);
 

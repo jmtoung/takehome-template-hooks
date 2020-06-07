@@ -1,18 +1,17 @@
 import React from 'react';
 import { Note } from './Note';
+import { useNotesContext, NoteType } from '../hooks/useNotes';
+import { useDeleteNote } from '../hooks/useDeleteNote';
 
-interface Note {
-  id: string;
-  title: string;
-  body: string;
+type Props = {
+  page: string
 }
-export const NoteList: React.FunctionComponent<{
-  notes: Array<Note>;
-  deleteNote: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-}> = (props) => {
-  const { notes, deleteNote } = props;
 
-  const noteListItems = notes.map((note: Note) => {
+export function NoteList ({ page }: Props) {
+  const [{ notes }] = useNotesContext()
+  const deleteNote = useDeleteNote(page)
+
+  const noteListItems = notes.map((note: NoteType) => {
     return (
       <Note
         key={note.id}

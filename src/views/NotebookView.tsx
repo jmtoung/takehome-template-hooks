@@ -1,33 +1,21 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 import { RouteComponentProps, useParams } from 'react-router-dom';
 import { Container, Jumbotron } from 'react-bootstrap';
-import { API } from '../api';
 import { AddNote } from '../components/AddNote';
 import { Pagination } from '../components/Pagination';
-import { useNotes } from '../hooks/useNotes';
+import { useNotesContext } from '../hooks/useNotes';
 import { NoteList } from '../components/NoteList';
+import { useFetchNotes } from '../hooks/useFetchNotes';
 
-export const NotebookView = ({ history }: RouteComponentProps) => {
+export const NotebookView = () => {
   const { page = '1' } = useParams();
-  const { fetchNotes, total, notes } = useNotes(page);
+  const [{ notes, total }] = useNotesContext()
 
-  const deleteNote = useCallback(async (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    const { id } = event.currentTarget.dataset;
-    if (id) {
-      const response = await API.deleteNote(id);
+  const fetchNotes = useFetchNotes()
 
-      if (response !== 'Not found') {
-        if (notes.length === 1) {
-          const previousPage = Number(page) - 1;
-          history.push(`/${previousPage}`);
-          return;
-        }
-      }
-      await fetchNotes();
-    }
-  }, [fetchNotes, history, notes.length, page])
+  useEffect(() => {
+    fetchNotes
+  }, [fetchNotes])
 
   if (!notes.length) {
     return null;
@@ -37,8 +25,8 @@ export const NotebookView = ({ history }: RouteComponentProps) => {
     <Container>
       <Jumbotron>
         <h1>NoteBook</h1>
-        <AddNote total={total} page={page} fetchNotes={fetchNotes} />
-        <NoteList notes={notes} deleteNote={deleteNote} />
+        <AddNote total={total} page={page} />
+        <NoteList page={page} />
         <Pagination total={total} page={page} />
       </Jumbotron>
     </Container>

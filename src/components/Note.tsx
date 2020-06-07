@@ -8,12 +8,14 @@ import { NoteForm } from './NoteForm';
 const deleteIcon = require('../assets/delete.png');
 const editIcon = require('../assets/pencil.png');
 
-export const Note: React.FunctionComponent<{
+type Props = {
   id: string;
   title: string;
   body: string;
   deleteNote: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-}> = (props) => {
+}
+
+export function Note(props: Props) {
   const [isUpdating, setIsUpdating] = useState(false);
   const { id } = props;
   const { value: title, onChange: changeTitle } = useInput(props.title);
@@ -25,21 +27,16 @@ export const Note: React.FunctionComponent<{
     setIsUpdating(false);
   };
 
-  let view;
-
-  if (isUpdating) {
-    view = (
+  const view = isUpdating? (
       <NoteForm
         text="Update Note"
         title={title}
         body={body}
-        handleSubmit={(e) => handleSubmit(e)}
+        handleSubmit={handleSubmit}
         handleBodyChange={changeBody}
         handleTitleChange={changeTitle}
       />
-    );
-  } else {
-    view = (
+    ) : (
       <div>
         <Row>
           <Col>
@@ -72,8 +69,7 @@ export const Note: React.FunctionComponent<{
           </Col>
         </Row>
       </div>
-    );
-  }
+  )
 
   return <div id={id}>{view}</div>;
-};
+}

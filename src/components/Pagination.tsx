@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export const Pagination: React.FunctionComponent<{
+type Props = {
   total: number;
   page: string;
-}> = (props) => {
+}
+
+export function Pagination(props: Props) {
   const { total, page } = props;
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(total / 10); i++) {
